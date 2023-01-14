@@ -22,11 +22,12 @@ echo "$5	$4.localdomain	$4" >> /etc/hosts
 echo "*******************************************************************************"
 echo "************************** INSTALLING KUBERNETES ******************************"
 echo "*******************************************************************************"
-apt update && sudo apt install -y apt-transport-https
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
-apt update
-apt install -y kubelet kubeadm kubectl
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates curl
+sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
 
 echo "*******************************************************************************"
 echo "***************************** INSTALLING DOCKER *******************************"
