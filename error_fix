@@ -1,0 +1,2 @@
+# It will delete all pods in Terminating status in default namespace.
+for p in $(kubectl get pods | grep Terminating | awk '{print $1}'); do kubectl delete pod $p --grace-period=0 --force;done
